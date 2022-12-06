@@ -1,5 +1,3 @@
-const hello = () => {
-  console.log("Hello World");
-};
+import { read } from "./utils";
 
-hello();
+console.log("file", read(1));
