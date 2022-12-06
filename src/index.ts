@@ -1,3 +1,3 @@
-import { readInput } from "./utils";
-
-console.log("file", readInput(1));
+import { calculate } from "./comps/day1";
+console.log("INDEX");
+calculate();
