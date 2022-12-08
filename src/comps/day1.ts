@@ -1,4 +1,3 @@
-import { A } from "@mobily/ts-belt";
 import { readInput } from "./../utils";
 
 export const calculate = () => {
