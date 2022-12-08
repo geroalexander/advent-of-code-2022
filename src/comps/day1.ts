@@ -1,10 +1,14 @@
+import { A } from "@mobily/ts-belt";
 import { readInput } from "./../utils";
 
 export const calculate = () => {
-  console.log("Day 1:", partOne());
+  console.log("Day 1:");
+  console.log("Part 1", partOne());
+
+  console.log("Part 2", partTwo());
 };
 
-const rawInput = readInput(2)
+const rawInput = readInput(1)
   .split("\n")
   .map((el) => parseInt(el));
 
@@ -25,7 +29,7 @@ const organizeRawData = (arr: number[]): Array<number[]> => {
   return arrOfElves;
 };
 
-const flattenMe = () => {
+const flattenMeAndSort = () => {
   const raw = organizeRawData(rawInput);
   const flattened = raw.flatMap((section) => {
     if (section.length > 1) {
@@ -37,11 +41,18 @@ const flattenMe = () => {
     }
     return section;
   });
-  return flattened;
+  return flattened.sort((a: number, b: number) => b - a);
 };
 
 const partOne = () => {
-  const flattened = flattenMe();
-  flattened.sort((a: number, b: number) => b - a);
-  return flattened[0];
+  return flattenMeAndSort()[0];
+};
+
+const partTwo = () => {
+  const arr = flattenMeAndSort();
+  let sum = 0;
+  arr.slice(0, 3).forEach((cal) => {
+    sum += cal;
+  });
+  return sum;
 };
