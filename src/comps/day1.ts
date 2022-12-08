@@ -1,29 +1,47 @@
 import { readInput } from "./../utils";
 
 export const calculate = () => {
-  console.log("Day 1:", findMostCals(rawInput));
+  console.log("Day 1:", partOne());
 };
 
-const rawInput = readInput(1)
+const rawInput = readInput(2)
   .split("\n")
   .map((el) => parseInt(el));
 
-const findMostCals = (arr: number[]) => {
-  let maxCal = 0;
-  let curCal = 0;
+const organizeRawData = (arr: number[]): Array<number[]> => {
+  let arrOfElves: Array<number[]> = [];
+  let curElfCal: number[] = [];
   arr.forEach((el) => {
-    // If element is `NaN`, check if currentCals is larger than maxCals and replace if nessesary.
+    // It's a new Elf.
     if (Number.isNaN(el)) {
-      if (curCal >= maxCal) {
-        maxCal = curCal;
-      }
-      // If this elf is not carrying more cals than the maxCal count then reset the currentCals to 0.
-      curCal = 0;
+      arrOfElves.push(curElfCal);
+      // Clear the array.
+      curElfCal = [];
       return;
     }
-    // Otherwise add el to curCal.
-    curCal += el;
+    // Not a new Elf.
+    curElfCal.push(el);
   });
+  return arrOfElves;
+};
 
-  return maxCal;
+const flattenMe = () => {
+  const raw = organizeRawData(rawInput);
+  const flattened = raw.flatMap((section) => {
+    if (section.length > 1) {
+      let sectionSum = 0;
+      section.forEach((num) => {
+        sectionSum += num;
+      });
+      return sectionSum;
+    }
+    return section;
+  });
+  return flattened;
+};
+
+const partOne = () => {
+  const flattened = flattenMe();
+  flattened.sort((a: number, b: number) => b - a);
+  return flattened[0];
 };
