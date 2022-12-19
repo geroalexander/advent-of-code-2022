@@ -56,6 +56,38 @@ const partOne = () => {
   return findPriorityValue(double);
 };
 
+const splitToTeams = (packs: Array<string>) => {
+  let currentIndex = 2;
+  let fullArr: Array<Array<string>> = [];
+  let mixArr: Array<string> = [];
+  rawInput.forEach((e, i) => {
+    if (i === currentIndex) {
+      mixArr.push(e);
+      currentIndex += 3;
+      fullArr.push(mixArr);
+      mixArr = [];
+      return;
+    }
+    mixArr.push(e);
+  });
+  return fullArr;
+};
+
+const findCommonInTripplet = (tripplet: Array<Array<string>>) => {
+  return tripplet.map((pack) => {
+    const first = pack[0].split("");
+    const second = pack[1];
+    const third = pack[2];
+    let common = "";
+    first.forEach((l, i) => {
+      if (second.includes(l) && third.includes(l)) {
+        common = first[i];
+      }
+    });
+    return common;
+  });
+};
+
 const partTwo = () => {
-  return "second part";
+  return findPriorityValue(findCommonInTripplet(splitToTeams(rawInput)));
 };
