@@ -1,3 +1,4 @@
+import { pipe } from "@mobily/ts-belt";
 import { readInput } from "./../utils";
 
 export const calculateDay3 = () => {
@@ -51,7 +52,7 @@ const findPriorityValue = (priorityItems: Array<string>) => {
 };
 
 const partOne = () => {
-  return findPriorityValue(findDouble(splitPack(rawInput)));
+  return pipe(rawInput, splitPack, findDouble, findPriorityValue);
 };
 
 const splitToTeams = (packs: Array<string>) => {
@@ -87,5 +88,5 @@ const findCommonInTripplet = (tripplet: Array<Array<string>>) => {
 };
 
 const partTwo = () => {
-  return findPriorityValue(findCommonInTripplet(splitToTeams(rawInput)));
+  return pipe(rawInput, splitToTeams, findCommonInTripplet, findPriorityValue);
 };
