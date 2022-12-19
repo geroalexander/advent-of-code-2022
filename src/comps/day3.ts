@@ -2,7 +2,7 @@ import { readInput } from "./../utils";
 
 export const calculateDay3 = () => {
   console.log("Day 3:\n");
-  // console.log(partOne());
+  console.log(partOne());
   console.log(partTwo());
 };
 
@@ -51,9 +51,7 @@ const findPriorityValue = (priorityItems: Array<string>) => {
 };
 
 const partOne = () => {
-  const splitPacks = splitPack(rawInput);
-  const double = findDouble(splitPacks);
-  return findPriorityValue(double);
+  return findPriorityValue(findDouble(splitPack(rawInput)));
 };
 
 const splitToTeams = (packs: Array<string>) => {
